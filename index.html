@@ -587,6 +587,64 @@
             flex-wrap: wrap;
         }
 
+        .portal-credentials {
+            width: min(100%, 920px);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            padding: 22px;
+            border: 1px solid rgba(197, 160, 89, 0.28);
+            border-radius: 20px;
+            background: linear-gradient(135deg, #fffaf0, #ffffff);
+            box-shadow: 0 14px 34px rgba(0,0,0,0.06);
+        }
+
+        .portal-credentials-copy {
+            color: var(--text-gray);
+        }
+
+        .portal-credentials-copy strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--deep-black);
+            font-size: 1rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .portal-credentials-copy p {
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .portal-credentials-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .portal-credential-item {
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: #fff;
+            border: 1px solid var(--border-light);
+        }
+
+        .portal-credential-item span {
+            display: block;
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-accent);
+            margin-bottom: 6px;
+        }
+
+        .portal-credential-item strong {
+            display: block;
+            color: var(--deep-black);
+            font-size: 1rem;
+            word-break: break-word;
+        }
+
         .portal-embed-link {
             color: var(--gold-accent);
             text-decoration: none;
@@ -1661,6 +1719,22 @@
             Existing users can access the live EquaSec portal below, while new estates can use the same section to preview the experience before booking a demo.
         </div>
         <div class="portal-embed-wrap">
+            <div class="portal-credentials" aria-label="Resident test account credentials">
+                <div class="portal-credentials-copy">
+                    <strong>Resident Test Account</strong>
+                    <p>Use these details when testing resident access on the portal.</p>
+                </div>
+                <div class="portal-credentials-list">
+                    <div class="portal-credential-item">
+                        <span>Username</span>
+                        <strong>tijalot817@bpotogo.com</strong>
+                    </div>
+                    <div class="portal-credential-item">
+                        <span>Password</span>
+                        <strong>961831</strong>
+                    </div>
+                </div>
+            </div>
             <div class="portal-embed-head">
                 <div>
                     <strong>EquaSec Portal</strong>
