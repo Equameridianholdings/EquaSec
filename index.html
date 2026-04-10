@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <style>
+            .hero-bg-video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 0;
+                opacity: 0;
+                transition: opacity 1.2s;
+                pointer-events: none;
+                filter: brightness(0.42);
+            }
+            .hero-bg-video.active {
+                opacity: 1;
+            }
+            .hero {
+                position: relative;
+                overflow: hidden;
+            }
+            .hero::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.52));
+                z-index: 1;
+                pointer-events: none;
+            }
+            .hero-content {
+                position: relative;
+                z-index: 2;
+                color: #fff;
+                text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+                max-width: 860px;
+                margin: 0 auto;
+            }
+        </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EquaSec | A Subsidiary of EquaMeridian</title>
+    <style>
+        :root {
+            --pure-white: #ffffff;
+            --off-white: #f9f9f9;
+            --gold-accent: #c5a059; /* Matching the EquaMeridian Gold */
+            --deep-black: #1a1a1a;
+            --text-gray: #4a4a4a;
+            --border-light: #e0e0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            background-color: var(--pure-white); 
+            color: var(--deep-black); 
+            line-height: 1.8;
+        }
+
+        /* Hero Section with Video/Image background feel */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: none;
+            padding: 0 20px;
+        }
+
+        .hero h1 { 
+            font-size: 3.5rem; 
+            letter-spacing: 4px; 
+            text-transform: uppercase; 
+            color: var(--deep-black);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span { color: var(--gold-accent); }
+
+        .hero p { 
+            font-size: 1.1rem; 
+            max-width: 600px; 
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation Bar Mockup */
+        nav {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            background: var(--pure-white);
+            z-index: 1000;
+        }
+        .logo { font-weight: bold; font-size: 1.5rem; letter-spacing: 2px; }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-badge {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            width:46px;
+            height:46px;
+            background:#fff;
+            border-radius:50%;
+            border:2.5px solid var(--gold-accent);
+            box-shadow:0 2px 8px rgba(0,0,0,0.07);
+            padding:3px;
+        }
+        .nav-logo {
+            width:38px;
+            height:38px;
+            border-radius:50%;
+            object-fit:cover;
+            display:block;
+        }
+        .nav-logo-text {
+            font-weight: bold;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: inherit;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .nav-toggle {
+            display: none;
+            width: 46px;
+            height: 46px;
+            border: 1px solid var(--border-light);
+            background: #fff;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .nav-toggle-lines {
+            position: relative;
+            width: 20px;
+            height: 14px;
+        }
+        .nav-toggle-lines span {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--deep-black);
+            transition: transform 0.2s ease, opacity 0.2s ease, top 0.2s ease;
+        }
+        .nav-toggle-lines span:nth-child(1) {
+            top: 0;
+        }
+        .nav-toggle-lines span:nth-child(2) {
+            top: 6px;
+        }
+        .nav-toggle-lines span:nth-child(3) {
+            top: 12px;
+        }
+        .nav-open .nav-toggle-lines span:nth-child(1) {
+            top: 6px;
+            transform: rotate(45deg);
+        }
+        .nav-open .nav-toggle-lines span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-open .nav-toggle-lines span:nth-child(3) {
+            top: 6px;
+            transform: rotate(-45deg);
+        }
+        .nav-link {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-link-cta {
+            padding: 11px 18px;
+            border: 1px solid var(--deep-black);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.82rem;
+        }
+
+        /* Content Sections */
+        .section { padding: 80px 10%; background: var(--pure-white); }
+        .section-alt { background: var(--off-white); }
+        .section-tone-sand {
+            background: linear-gradient(180deg, #fbf8f1 0%, #ffffff 100%);
+        }
+        .section-tone-blue {
+            background: linear-gradient(180deg, #f5f9fc 0%, #ffffff 100%);
+        }
+        .section-tone-cream {
+            background: linear-gradient(180deg, #fcfaf5 0%, #ffffff 100%);
+        }
+        .section-tone-slate {
+            background: linear-gradient(180deg, #f4f6f8 0%, #ffffff 100%);
+        }
+        .section-tone-warm {
+            background: linear-gradient(180deg, #f8f4ec 0%, #ffffff 100%);
+        }
+        .section-panel {
+            position: relative;
+        }
+        .section-panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.35), transparent);
+        }
+
+        .section-title { 
+            font-size: 2rem; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            margin-bottom: 50px; 
+            text-align: center;
+        }
+        .section-intro {
+            max-width: 860px;
+            margin: 0 auto 42px;
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 1.08rem;
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        
+        .card { 
+            padding: 40px; 
+            border: 1px solid var(--border-light);
+            transition: 0.4s;
+            background: var(--pure-white);
+        }
+
+        .card:hover { border-color: var(--gold-accent); }
+        .card h3 { color: var(--gold-accent); text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px; }
+
+        /* Buttons */
+        .btn {
+            padding: 15px 40px;
+            border: 1px solid var(--deep-black);
+            background: transparent;
+            color: var(--deep-black);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: var(--gold-accent);
+            border-color: var(--gold-accent);
+            color: var(--pure-white);
+        }
+
+        /* Contact Section */
+        .footer {
+            padding: 60px 10%;
+            background: var(--deep-black);
+            color: var(--pure-white);
+            text-align: center;
+        }
+
+        .footer p { color: var(--gold-accent); margin-bottom: 10px; }
+
+        .footer-grid {
+            max-width: 1120px;
+            margin: 0 auto 34px;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 28px;
+            text-align: left;
+        }
+
+        .footer-title {
+            color: var(--gold-accent);
+            font-size: 0.9rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .footer-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+
+        .footer-copy,
+        .footer-link,
+        .footer-meta {
+            color: rgba(255,255,255,0.76);
+        }
+
+        .footer-copy {
+            max-width: 420px;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            display: grid;
+            gap: 10px;
+        }
+
+        .footer-link {
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            color: #fff;
+        }
+
+        .footer-divider {
+            max-width: 1120px;
+            margin: 0 auto 18px;
+            border-top: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .footer-bottom {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .footer-meta {
+            font-size: 0.92rem;
+        }
+
+        .eyebrow {
+            letter-spacing: 0.35em;
+            font-size: 1.05rem;
+            font-weight: 700;
+            opacity: 0.85;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4.25rem);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 18px;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            font-weight: 400;
+            opacity: 0.95;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .trust-strip {
+            max-width: 1120px;
+            margin: -44px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 4;
+        }
+
+        .trust-strip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.09);
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 26px;
+        }
+
+        .trust-stat {
+            text-align: center;
+        }
+
+        .trust-stat strong {
+            display: block;
+            font-size: 2rem;
+            color: var(--gold-accent);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .trust-stat span {
+            color: var(--text-gray);
+            font-size: 0.98rem;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 190px;
+            padding: 15px 24px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.85rem;
+            transition: 0.2s ease;
+        }
+
+        .primary-btn {
+            background: var(--gold-accent);
+            color: #fff;
+            border: 1px solid var(--gold-accent);
+        }
+
+        .secondary-btn {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.45);
+            backdrop-filter: blur(3px);
+        }
+
+        .primary-btn:hover,
+        .secondary-btn:hover,
+        .nav-link-cta:hover {
+            transform: translateY(-1px);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 32px;
+            margin-top: 24px;
+        }
+
+        .feature-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            padding: 36px 28px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 16px;
+            border-radius: 16px;
+            background: rgba(197, 160, 89, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-accent);
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .feature-card h3 {
+            color: var(--gold-accent);
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+        }
+
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 26px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .how-card {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 30px 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .how-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gold-accent);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .how-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .how-card p {
+            color: var(--text-gray);
+        }
+
+        .integrations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .portal-embed-wrap {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: grid;
+            gap: 26px;
+            justify-items: center;
+        }
+
+        .portal-embed-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 22px;
+            border: 1px solid var(--border-light);
+            background: #fcfcfc;
+            border-radius: 20px;
+            flex-wrap: wrap;
+            width: min(100%, 920px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+        }
+
+        .portal-embed-head strong {
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .portal-embed-head span {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .portal-embed-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .portal-embed-link {
+            color: var(--gold-accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .portal-phone {
+            width: min(100%, 390px);
+            background: linear-gradient(180deg, #1f1f1f, #0f0f0f);
+            border-radius: 42px;
+            padding: 14px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.22), inset 0 0 0 1px rgba(255,255,255,0.08);
+        }
+
+        .portal-phone-inner {
+            background: #000;
+            border-radius: 32px;
+            padding: 12px 12px 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-phone-notch {
+            width: 132px;
+            height: 24px;
+            border-radius: 0 0 18px 18px;
+            background: #050505;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .portal-phone-speaker {
+            width: 44px;
+            height: 5px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.16);
+            position: absolute;
+            top: 9px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .portal-phone-camera {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.22);
+            position: absolute;
+            top: 8px;
+            left: calc(50% + 34px);
+            z-index: 3;
+        }
+
+        .portal-phone-screen {
+            border-radius: 26px;
+            overflow: hidden;
+            background: #fff;
+            position: relative;
+        }
+
+        .portal-embed-frame {
+            width: 100%;
+            height: 720px;
+            border: none;
+            background: #fff;
+            display: block;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .portal-embed-frame::-webkit-scrollbar {
+            display: none;
+        }
+
+        .integration-card {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 26px 22px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+        }
+
+        .integration-card strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--deep-black);
+        }
+
+        .integration-card p {
+            color: var(--text-gray);
+            font-size: 0.98rem;
+        }
+
+        .testimonial-slider {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-viewport {
+            overflow: hidden;
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.4s ease;
+            will-change: transform;
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 0 10px;
+            flex: 0 0 100%;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            margin-top: 26px;
+        }
+
+        .testimonial-arrow {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid var(--border-light);
+            background: #fff;
+            color: var(--deep-black);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+        }
+
+        .testimonial-dots {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(197, 160, 89, 0.28);
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .testimonial-dot.is-active {
+            background: var(--gold-accent);
+            transform: scale(1.18);
+        }
+
+        .testimonial-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px 26px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.05);
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .benefits-slider {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .benefits-viewport {
+            overflow: hidden;
+        }
+
+        .benefits-track {
+            display: flex;
+            transition: transform 0.4s ease;
+            will-change: transform;
+        }
+
+        .benefits-slide {
+            min-width: 100%;
+            padding: 0 10px;
+            flex: 0 0 100%;
+        }
+
+        .benefits-card {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .testimonial-avatar {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center center;
+            display: block;
+            border: 2px solid rgba(197, 160, 89, 0.28);
+            background: linear-gradient(135deg, #f0eadf, #d8c29a);
+        }
+
+        .testimonial-avatar-portrait {
+            object-position: center 18%;
+        }
+
+        .testimonial-avatar-placeholder {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.08em;
+            border: 2px solid rgba(197, 160, 89, 0.28);
+            background: linear-gradient(135deg, #b08a44, #d1b57b);
+            flex-shrink: 0;
+        }
+
+        .testimonial-meta {
+            flex: 1;
+        }
+
+        .testimonial-stars {
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+            display: inline-flex;
+            gap: 3px;
+        }
+
+        .testimonial-stars .star {
+            color: var(--gold-accent);
+            line-height: 1;
+        }
+
+        .testimonial-stars .star-empty {
+            opacity: 0.35;
+        }
+
+        .testimonial-stars .star-half {
+            background: linear-gradient(90deg, var(--gold-accent) 50%, rgba(197, 160, 89, 0.35) 50%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .testimonial-quote {
+            font-size: 1.02rem;
+            color: var(--text-gray);
+            margin-bottom: 18px;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-role {
+            color: var(--gold-accent);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .cta-banner {
+            max-width: 1120px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #141414, #272727);
+            color: #fff;
+            border-radius: 22px;
+            padding: 38px 34px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 24px;
+            align-items: center;
+            box-shadow: 0 24px 44px rgba(0,0,0,0.16);
+        }
+
+        .cta-banner h3 {
+            font-size: 1.7rem;
+            margin-bottom: 10px;
+            letter-spacing: 0.03em;
+        }
+
+        .cta-banner p {
+            color: rgba(255,255,255,0.8);
+            max-width: 720px;
+        }
+
+        .cta-banner-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .cta-banner .secondary-btn {
+            background: transparent;
+        }
+
+        .faq-list {
+            max-width: 920px;
+            margin: 0 auto;
+            display: grid;
+            gap: 14px;
+        }
+
+        .faq-item {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 22px 24px;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            color: var(--deep-black);
+        }
+
+        .faq-icon {
+            font-size: 1.4rem;
+            color: var(--gold-accent);
+            line-height: 1;
+            margin-left: 16px;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 24px 22px;
+            color: var(--text-gray);
+        }
+
+        .faq-item.is-open .faq-answer {
+            max-height: 220px;
+        }
+
+        .faq-item.is-open .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .overview-video-section {
+            padding-top: 30px;
+        }
+
+        .overview-video-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .overview-video-frame {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.14);
+        }
+
+        .overview-video-frame video {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #000;
+        }
+
+        .overview-video-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.52));
+            cursor: pointer;
+            transition: opacity 0.25s ease;
+        }
+
+        .overview-video-overlay.is-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .overview-video-play {
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(197, 160, 89, 0.96);
+            color: #fff;
+            font-size: 2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 16px 30px rgba(0,0,0,0.24);
+            cursor: pointer;
+        }
+
+        .overview-video-caption {
+            margin-top: 18px;
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        .pricing-card {
+            flex: 1 1 320px;
+            min-width: 280px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            padding: 36px 28px;
+            text-align: center;
+        }
+
+        .contact-shell {
+            display: grid;
+            grid-template-columns: minmax(240px, 320px) minmax(320px, 1fr);
+            gap: 28px;
+            align-items: start;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .contact-panel,
+        .contact-sidebar {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            padding: 32px 28px;
+        }
+
+        .contact-sidebar {
+            background: linear-gradient(180deg, #f6f3ed, #ffffff);
+        }
+
+        .contact-sidebar h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .contact-sidebar p {
+            color: var(--text-gray);
+            margin-bottom: 18px;
+        }
+
+        .contact-meta {
+            display: grid;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .contact-meta-item {
+            border-top: 1px solid var(--border-light);
+            padding-top: 14px;
+        }
+
+        .contact-meta-item strong {
+            display: block;
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-accent);
+            margin-bottom: 5px;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            display: block;
+            border-radius: 18px;
+            overflow: hidden;
+            text-decoration: none;
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.12);
+            background: #000;
+        }
+
+        .video-thumbnail img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+
+        .video-thumbnail::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 26, 26, 0.7), rgba(26, 26, 26, 0.08));
+        }
+
+        .video-thumbnail:hover .video-thumbnail-play {
+            transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        .video-thumbnail-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            background: rgba(197, 160, 89, 0.94);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: transform 0.25s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22);
+        }
+
+        .video-thumbnail-caption {
+            position: absolute;
+            left: 24px;
+            right: 24px;
+            bottom: 22px;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .video-thumbnail-caption strong {
+            display: block;
+            font-size: 1.15rem;
+            letter-spacing: 0.04em;
+            margin-bottom: 4px;
+        }
+
+        .video-thumbnail-caption span {
+            font-size: 0.95rem;
+            opacity: 0.92;
+        }
+
+        .video-thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            width: min(100%, 1080px);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .contact-label {
+            display: block;
+            font-weight: bold;
+            color: var(--gold-accent);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .contact-control {
+            width: 100%;
+            padding: 18px 20px;
+            border: 1px solid var(--border-light);
+            border-radius: 0;
+            background: #fafbfc;
+            font-size: 1rem;
+            color: var(--deep-black);
+            appearance: none;
+        }
+
+        .contact-control::placeholder {
+            color: #6b7280;
+        }
+
+        .contact-row {
+            display: grid;
+            grid-template-columns: minmax(240px, 280px) 1fr;
+            gap: 16px;
+        }
+
+        .country-code-select {
+            font-size: 0.95rem;
+            padding-right: 36px;
+        }
+
+        .contact-submit {
+            margin-top: 8px;
+            padding: 18px 0;
+            background: var(--deep-black);
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 0;
+            letter-spacing: 3px;
+            cursor: pointer;
+        }
+
+        .contact-note {
+            color: var(--text-gray);
+            font-size: 0.94rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        @media (max-width: 640px) {
+            .contact-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+            nav {
+                padding: 18px 22px;
+                position: relative;
+                gap: 16px;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+                margin-left: auto;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: calc(100% + 10px);
+                left: 22px;
+                right: 22px;
+                background: #fff;
+                border: 1px solid var(--border-light);
+                box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+                padding: 18px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .nav-open .nav-links {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 10px 0;
+            }
+
+            .nav-link-cta {
+                text-align: center;
+            }
+
+            .contact-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-banner {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-copy {
+                max-width: none;
+            }
+
+            .footer-bottom {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="site-nav">
+        <div class="logo nav-brand">
+            <span class="nav-badge">
+                <img src="favicon.png" alt="EquaSec Logo" class="nav-logo">
+            </span>
+            <span class="nav-logo-text">EQUA<span style="color: var(--gold-accent);">SEC</span></span>
+        </div>
+        <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation menu">
+            <span class="nav-toggle-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </button>
+        <div id="nav-links" class="nav-links">
+            <a href="#solutions" class="nav-link">Solutions</a>
+            <a href="#pricing" class="nav-link">Pricing</a>
+            <a href="#contact" class="nav-link">Contact</a>
+            <a href="https://equasec.co.za/login" target="_blank" rel="noopener" class="nav-link">Portal</a>
+            <a href="#contact" class="nav-link nav-link-cta">Book a Demo</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div id="hero-videos-container">
+            <video class="hero-bg-video active" src="istockphoto-1220277667-640_adpp_is.mp4" autoplay loop muted playsinline></video>
+            <video class="hero-bg-video" src="istockphoto-1282811117-640_adpp_is.mp4" autoplay loop muted playsinline></video>
+            <video class="hero-bg-video" src="istockphoto-1352893394-640_adpp_is.mp4" autoplay loop muted playsinline></video>
+            <video class="hero-bg-video" src="istockphoto-1616235399-640_adpp_is.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="hero-content">
+            <div class="eyebrow">SMART ESTATE SECURITY PLATFORM</div>
+            <div class="hero-title">
+                Connected Access.<br>Safer Communities.
+            </div>
+            <div class="hero-description">
+                EquaSec brings residents, estate management, and security teams onto one modern platform for access control, visitor management, communication, and rapid response. <br>
+                Built for estates that want fewer delays, clearer oversight, and a better daily experience for everyone on site.
+            </div>
+            <div class="hero-actions">
+                <a href="#contact" class="primary-btn">Request a Demo</a>
+                <a href="#solutions" class="secondary-btn">Explore the Platform</a>
+            </div>
+        </div>
+        <script>
+        // Video carousel logic for hero background
+        const videos = document.querySelectorAll('.hero-bg-video');
+        let current = 0;
+        setInterval(() => {
+            videos[current].classList.remove('active');
+            current = (current + 1) % videos.length;
+            videos[current].classList.add('active');
+        }, 6000); // Change video every 6 seconds
+        </script>
+    </section>
+
+    <section class="trust-strip reveal">
+        <div class="trust-strip-grid">
+            <div class="trust-stat">
+                <strong>18+</strong>
+                <span>complexes already using EquaSec</span>
+            </div>
+            <div class="trust-stat">
+                <strong>0</strong>
+                <span>mandatory hardware cost to get started</span>
+            </div>
+            <div class="trust-stat">
+                <strong>1</strong>
+                <span>platform for residents, guards, and management</span>
+            </div>
+            <div class="trust-stat">
+                <strong>24/7</strong>
+                <span>gate visibility and visitor verification support</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="solutions" class="section section-tone-sand section-panel reveal">
+        <h2 class="section-title">Built for Residents, Management, and Security</h2>
+        <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+            <div class="video-thumbnail-grid">
+                <a class="video-thumbnail" href="https://youtube.com/shorts/4SnDqrpomcQ?feature=share" target="_blank" rel="noopener" aria-label="Watch EquaSec resident view video on YouTube">
+                    <img src="https://img.youtube.com/vi/4SnDqrpomcQ/hqdefault.jpg" alt="EquaSec resident view YouTube video thumbnail">
+                    <span class="video-thumbnail-play" aria-hidden="true">▶</span>
+                    <span class="video-thumbnail-caption">
+                        <strong>Resident View</strong>
+                        <span>Preview the resident experience for visitor access and community interaction.</span>
+                    </span>
+                </a>
+                <a class="video-thumbnail" href="https://youtu.be/dZf8IQqhmbI" target="_blank" rel="noopener" aria-label="Watch EquaSec guard portal video on YouTube">
+                    <img src="https://img.youtube.com/vi/dZf8IQqhmbI/hqdefault.jpg" alt="EquaSec guard portal YouTube video thumbnail">
+                    <span class="video-thumbnail-play" aria-hidden="true">▶</span>
+                    <span class="video-thumbnail-caption">
+                        <strong>Security Guard View</strong>
+                        <span>Preview the guard portal workflow for secure entry and real-time control.</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="section-intro">
+            EquaSec simplifies how modern estates control entry, manage visitors, communicate with residents, and support on-site security teams. The platform is designed to reduce manual processes, improve response times, and give every stakeholder clear visibility.
+        </div>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4z"></path><path d="M14 20h6v-9h-6z"></path><path d="M14 10h6V4h-6z"></path><path d="M4 20h6v-3H4z"></path></svg>
+                </div>
+                <h3>Centralized Security Dashboard</h3>
+                <p>Monitor visitor activity, entry trends, site operations, and security performance from one clear control center.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"></path><path d="M9.5 12.5l1.8 1.8 3.7-4"></path></svg>
+                </div>
+                <h3>Automated Guard Management</h3>
+                <p>Equip security teams with structured workflows, controlled permissions, guard movement monitoring, and faster handling at every access point.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M4 6h16v10H8l-4 4z"></path><path d="M8 10h8"></path><path d="M8 13h5"></path></svg>
+                </div>
+                <h3>Live Chat & Notifications</h3>
+                <p>Keep residents, security, and management aligned with direct updates, alerts, and fast communication when it matters.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M14 3a4 4 0 0 1 0 8H8v4"></path><path d="M8 15v6"></path><path d="M5 18h6"></path><circle cx="16.5" cy="7" r="1.2" fill="currentColor" stroke="none"></circle></svg>
+                </div>
+                <h3>Digital Visitor Management</h3>
+                <p>Replace paper registers and ad hoc approvals with secure digital visitor workflows and a reliable audit trail.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"></rect><path d="M10 5.5h4"></path><path d="M11.5 18.5h1"></path></svg>
+                </div>
+                <h3>Mobile App Convenience</h3>
+                <p>Give residents a simple mobile experience for access requests, visitor codes, updates, and estate communication.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section overview-video-section section-tone-slate section-panel reveal">
+        <h2 class="section-title">Platform Overview</h2>
+        <div class="section-intro">
+            This overview video explains the full EquaSec picture, from resident convenience and visitor management to guard workflows and estate-wide control.
+        </div>
+        <div class="overview-video-wrap">
+            <div class="overview-video-frame">
+                <video id="overview-video" controls preload="metadata" poster="image-b35b31d0-9fbe-4776-a1ec-f2a01f9f987f.avif">
+                    <source src="EquaSec_ Redefining Home Security.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div id="overview-video-overlay" class="overview-video-overlay" role="button" tabindex="0" aria-label="Play EquaSec overview video">
+                    <button class="overview-video-play" type="button" aria-hidden="true">▶</button>
+                </div>
+            </div>
+            <div class="overview-video-caption">
+                Watch the full EquaSec overview directly on the page.
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-tone-cream section-panel reveal">
+        <h2 class="section-title">Testimonials</h2>
+        <div class="section-intro">
+            Feedback from live residential environments using EquaSec for visitor management, gate verification, and day-to-day estate operations.
+        </div>
+        <div class="testimonial-slider" id="testimonial-slider">
+            <div class="testimonial-viewport">
+                <div class="testimonial-track" id="testimonial-track">
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <img class="testimonial-avatar testimonial-avatar-portrait" src="Screenshot 2026-04-10 094914.png" alt="Estate Operations Lead">
+                                <div class="testimonial-meta">
+                                    <div class="testimonial-stars" aria-label="4.5 out of 5 stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star star-half">★</span>
+                                    </div>
+                                    <div class="testimonial-author">Estate Operations Lead</div>
+                                    <div class="testimonial-role">Residential Complex</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-quote">“EquaSec helped us move away from gate-book confusion and manual confirmations. The process is cleaner for residents and much easier for our guards to manage.”</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <img class="testimonial-avatar testimonial-avatar-portrait" src="Screenshot 2026-04-10 094938.png" alt="Security Supervisor">
+                                <div class="testimonial-meta">
+                                    <div class="testimonial-stars" aria-label="4 out of 5 stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star star-empty">★</span>
+                                    </div>
+                                    <div class="testimonial-author">Security Supervisor</div>
+                                    <div class="testimonial-role">Managed Community</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-quote">“The ability to verify visitors and vehicles from the guard room has made entry control faster and more secure. It removes a lot of uncertainty at the gate.”</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <img class="testimonial-avatar testimonial-avatar-portrait" src="Screenshot 2026-04-10 095001.png" alt="Property Management Team">
+                                <div class="testimonial-meta">
+                                    <div class="testimonial-stars" aria-label="3.5 out of 5 stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star star-half">★</span>
+                                        <span class="star star-empty">★</span>
+                                    </div>
+                                    <div class="testimonial-author">Property Management Team</div>
+                                    <div class="testimonial-role">Complex Administration</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-quote">“Residents appreciate not having to walk to the gate or rely on last-minute calls. The platform creates a more professional experience for the whole estate.”</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-controls">
+                <button id="testimonial-prev" class="testimonial-arrow" type="button" aria-label="Show previous testimonial">&#8592;</button>
+                <div class="testimonial-dots" id="testimonial-dots">
+                    <button class="testimonial-dot is-active" type="button" aria-label="Show testimonial 1"></button>
+                    <button class="testimonial-dot" type="button" aria-label="Show testimonial 2"></button>
+                    <button class="testimonial-dot" type="button" aria-label="Show testimonial 3"></button>
+                </div>
+                <button id="testimonial-next" class="testimonial-arrow" type="button" aria-label="Show next testimonial">&#8594;</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-tone-blue section-panel reveal">
+        <h2 class="section-title">How EquaSec Works</h2>
+        <div class="section-intro">
+            The platform keeps the process structured before a visitor arrives, while they are at the gate, and after entry has been approved. That means less uncertainty for guards, less friction for residents, and stronger control for estate management.
+        </div>
+        <div class="how-grid">
+            <div class="how-card">
+                <div class="how-number">1</div>
+                <h3>Pre-Register Visitors</h3>
+                <p>Residents or management capture expected visitors ahead of time, with unique visitor codes and the right access details already stored in the system.</p>
+            </div>
+            <div class="how-card">
+                <div class="how-number">2</div>
+                <h3>Verify at the Gate</h3>
+                <p>Guards check vehicle details, resident status, walk-ins, and approved visitors from the guard room without relying on paper books or unclear phone confirmations.</p>
+            </div>
+            <div class="how-card">
+                <div class="how-number">3</div>
+                <h3>Approve with Confidence</h3>
+                <p>Because visitor records are already captured and searchable, guards can validate faster, reduce exposure at the entrance, and keep a secure digital audit trail.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-tone-warm section-panel reveal">
+        <h2 class="section-title">Why Estates Choose EquaSec</h2>
+        <div class="section-intro">
+            EquaSec improves security without making access slower or more complicated. It gives guards, residents, and estate teams a better way to manage entry while reducing manual checks, delays, and avoidable risk at the gate.
+        </div>
+        <div class="benefits-slider" id="benefits-slider">
+            <div class="benefits-viewport">
+                <div class="benefits-track" id="benefits-track">
+                    <div class="benefits-slide">
+                        <div class="card benefits-card">
+                            <h3>Secure Convenience</h3>
+                            <p>Residents can book visitors in advance, avoid unnecessary trips to the gate, and let guards handle verification through the system for a smoother and more secure arrival process.</p>
+                        </div>
+                    </div>
+                    <div class="benefits-slide">
+                        <div class="card benefits-card">
+                            <h3>No Extra Hardware Costs</h3>
+                            <p>EquaSec is designed to deliver operational value without forcing estates into unnecessary hardware spend, helping communities modernize access in a more affordable way.</p>
+                        </div>
+                    </div>
+                    <div class="benefits-slide">
+                        <div class="card benefits-card">
+                            <h3>Safer Gate Verification</h3>
+                            <p>Guards can review registered vehicles, pre-authorized visitors, and walk-ins from the guard room, reducing the need to leave their post to manually inspect or confirm arrivals.</p>
+                        </div>
+                    </div>
+                    <div class="benefits-slide">
+                        <div class="card benefits-card">
+                            <h3>Guard Movement Visibility</h3>
+                            <p>EquaSec can help management monitor guard activity and movement, improving accountability, oversight, and response coordination across the estate.</p>
+                        </div>
+                    </div>
+                    <div class="benefits-slide">
+                        <div class="card benefits-card">
+                            <h3>Less Risk at the Entrance</h3>
+                            <p>Instead of waiting for a visitor to arrive and then calling a resident to confirm access, estates can work from approved visitor records already captured in the system, reducing confusion and exposure at the gate.</p>
+                        </div>
+                    </div>
+                    <div class="benefits-slide">
+                        <div class="card benefits-card">
+                            <h3>Clear Visitor Identification</h3>
+                            <p>The system helps guards confirm whether a person is a resident or a visitor, and every visitor can be linked to a unique visitor code for faster and more reliable access validation without depending on a handwritten visitor book.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-controls">
+                <button id="benefits-prev" class="testimonial-arrow" type="button" aria-label="Show previous benefit">&#8592;</button>
+                <div class="testimonial-dots" id="benefits-dots">
+                    <button class="testimonial-dot is-active" type="button" aria-label="Show benefit 1"></button>
+                    <button class="testimonial-dot" type="button" aria-label="Show benefit 2"></button>
+                    <button class="testimonial-dot" type="button" aria-label="Show benefit 3"></button>
+                    <button class="testimonial-dot" type="button" aria-label="Show benefit 4"></button>
+                    <button class="testimonial-dot" type="button" aria-label="Show benefit 5"></button>
+                    <button class="testimonial-dot" type="button" aria-label="Show benefit 6"></button>
+                </div>
+                <button id="benefits-next" class="testimonial-arrow" type="button" aria-label="Show next benefit">&#8594;</button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section section-tone-slate section-panel reveal">
+        <h2 class="section-title">Integrations and Access Options</h2>
+        <div class="section-intro">
+            EquaSec works as a modern software-first platform and can also support added access-control layers where the estate requires them. Optional hardware-based integrations are quoted according to the site setup.
+        </div>
+        <div class="integrations-grid">
+            <div class="integration-card">
+                <strong>Visitor Codes</strong>
+                <p>Issue unique digital visitor codes that help guards validate entry faster and with better auditability.</p>
+            </div>
+            <div class="integration-card">
+                <strong>Guard Portal</strong>
+                <p>Give on-site security teams a dedicated interface for resident checks, visitor lookups, and vehicle verification.</p>
+            </div>
+            <div class="integration-card">
+                <strong>Keypad Access</strong>
+                <p>Support keypad-based workflows where estates want a physical input point alongside digital access management.</p>
+            </div>
+            <div class="integration-card">
+                <strong>Biometric Scanners</strong>
+                <p>Biometric integrations can be included for sites that require enhanced identity validation and controlled access points.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-tone-cream section-panel reveal">
+        <h2 class="section-title">Portal Access</h2>
+        <div class="section-intro">
+            Existing users can access the live EquaSec portal below, while new estates can use the same section to preview the experience before booking a demo.
+        </div>
+        <div class="portal-embed-wrap">
+            <div class="portal-embed-head">
+                <div>
+                    <strong>EquaSec Portal</strong>
+                    <span>Use the live portal below, or book a guided demo if you want a walkthrough.</span>
+                </div>
+                <div class="portal-embed-actions">
+                    <a class="portal-embed-link" href="#contact">Book a demo</a>
+                </div>
+            </div>
+            <div class="portal-phone">
+                <div class="portal-phone-inner">
+                    <div class="portal-phone-notch" aria-hidden="true"></div>
+                    <div class="portal-phone-speaker" aria-hidden="true"></div>
+                    <div class="portal-phone-camera" aria-hidden="true"></div>
+                    <div class="portal-phone-screen">
+                        <iframe
+                            class="portal-embed-frame"
+                            src="https://equasec.co.za/login"
+                            title="EquaSec portal login"
+                            loading="lazy"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section section-tone-sand section-panel reveal">
+        <a id="pricing"></a>
+        <h2 class="section-title">Request a Quote</h2>
+        <div style="max-width: 500px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 32px; justify-content: center;">
+            <div class="pricing-card">
+                <h3 style="color: var(--gold-accent); font-size: 1.35rem; margin-bottom: 12px;">Per Unit Pricing</h3>
+                <div style="font-size: 2rem; font-weight: bold; margin-bottom: 10px;">Custom Quote</div>
+                <div style="color: var(--text-gray); margin-bottom: 18px;">Every community is different, so pricing is quoted per unit according to your estate size, operational setup, and security requirements.</div>
+                <ul style="list-style: none; padding: 0; color: var(--deep-black); font-size: 1.05rem; text-align: left; margin-bottom: 18px;">
+                    <li>✔ Quote tailored to your number of units</li>
+                    <li>✔ Scaled for estate size and operational needs</li>
+                    <li>✔ No mandatory hardware cost burden</li>
+                    <li>✔ Optional keypad and biometric integrations available</li>
+                    <li>✔ Multiple Users Per Property</li>
+                    <li>✔ Resident, Management, and Guard Features</li>
+                    <li>✔ Secure Cloud-Based Environment</li>
+                    <li>✔ Ongoing Updates and Maintenance</li>
+                    <li>✔ Priority Support</li>
+                    <li>✔ Security Companies: Free</li>
+                </ul>
+                <div style="color: var(--text-gray); font-size: 0.98rem;">Contact EquaSec for a tailored quote and product walkthrough for your property. If keypad access or biometric scanners are required, those integrations can be included in a custom quote.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-tone-warm section-panel reveal">
+        <div class="cta-banner">
+            <div>
+                <h3>Ready to modernize estate access control?</h3>
+                <p>Book a demo to see how EquaSec can improve resident convenience, reduce gate-side risk, and give your team better control across the entire estate.</p>
+            </div>
+            <div class="cta-banner-actions">
+                <a href="#contact" class="primary-btn">Book a Demo</a>
+                <a href="https://wa.me/27662737455" target="_blank" rel="noopener" class="secondary-btn">WhatsApp Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-tone-blue section-panel reveal">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="section-intro">
+            These are the questions estates usually ask before rollout, pricing, or choosing optional integrations.
+        </div>
+        <div class="faq-list">
+            <div class="faq-item is-open">
+                <button class="faq-question" type="button" aria-expanded="true">
+                    <span>Do we need new hardware to use EquaSec?</span>
+                    <span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Not necessarily. EquaSec is designed to provide value without forcing estates into mandatory hardware costs. Where keypad or biometric integrations are needed, those can be quoted separately.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>Can guards verify walk-ins and residents through the system?</span>
+                    <span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Yes. Guards can use the platform to check whether a person is a resident, a booked visitor, or a walk-in, helping reduce uncertainty and improve decision-making at the gate.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>How is pricing structured?</span>
+                    <span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Pricing is quoted per unit and depends on the size of the estate, the required workflows, and whether additional integrations or hardware options are needed.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>Can EquaSec work for both residents and security teams?</span>
+                    <span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Yes. The platform is built to support residents, estate management, and guards from one shared system, with each role getting the right workflow and visibility.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section section-tone-slate section-panel reveal">
+        <h2 class="section-title">Talk to EquaSec</h2>
+        <div class="contact-shell">
+            <div class="contact-sidebar">
+                <h3>Book a Demo</h3>
+                <p>See how EquaSec can improve resident convenience, gate control, and operational oversight for your estate.</p>
+                <div class="contact-meta">
+                    <div class="contact-meta-item">
+                        <strong>Best For</strong>
+                        <span>Residential estates, sectional title schemes, and managed communities.</span>
+                    </div>
+                    <div class="contact-meta-item">
+                        <strong>What You Can Ask</strong>
+                        <span>Pricing, demos, rollout options, visitor management, and guard portal workflows.</span>
+                    </div>
+                    <div class="contact-meta-item">
+                        <strong>Response</strong>
+                        <span>Leave your details and the team will get back to you promptly.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-panel">
+                <div style="text-align: center; color: var(--text-gray); margin-bottom: 22px; font-size: 1.02rem; line-height: 1.7;">
+                    Request a demo, ask for a quote, or speak to us about how EquaSec can support your residents, management team, and security operation.
+                </div>
+                <form id="contact-form" class="contact-form">
+                    <div>
+                        <label class="contact-label" for="full-name">FULL NAME</label>
+                        <input id="full-name" name="fullName" class="contact-control" type="text" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label class="contact-label" for="service-required">SERVICE REQUIRED</label>
+                        <select id="service-required" name="serviceRequired" class="contact-control" required>
+                            <option value="" selected disabled>Select a service</option>
+                            <option value="Resident access management">Resident access management</option>
+                            <option value="Visitor management">Visitor management</option>
+                            <option value="Guard portal">Guard portal</option>
+                            <option value="Estate security solution">Estate security solution</option>
+                            <option value="Request a demo">Request a demo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="contact-label" for="phone-number">PHONE NUMBER</label>
+                        <div class="contact-row">
+                            <select name="countryCode" class="contact-control country-code-select" aria-label="Country code">
+                                <option value="+27" selected>+27 South Africa</option>
+                                <option value="+44">+44 United Kingdom</option>
+                                <option value="+1">+1 United States</option>
+                                <option value="+971">+971 UAE</option>
+                            </select>
+                            <input id="phone-number" name="phoneNumber" class="contact-control" type="tel" placeholder="Digits only" inputmode="numeric" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="contact-label" for="inquiry-details">INQUIRY DETAILS</label>
+                        <textarea id="inquiry-details" name="inquiryDetails" class="contact-control" rows="6" placeholder="Tell us about your estate, access control needs, or the demo you want to book." required></textarea>
+                    </div>
+                    <button type="submit" class="contact-submit">SEND MESSAGE</button>
+                    <div class="contact-note">Submit your details and we will get back to you promptly.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-title">EquaSec</div>
+                <div class="footer-brand">Connected Access. Safer Communities.</div>
+                <div class="footer-copy">EquaSec helps estates modernize visitor management, resident access, and guard workflows through one secure platform designed for convenience, visibility, and operational control.</div>
+            </div>
+            <div>
+                <div class="footer-title">Quick Links</div>
+                <div class="footer-links">
+                    <a class="footer-link" href="#solutions">Solutions</a>
+                    <a class="footer-link" href="#pricing">Pricing</a>
+                    <a class="footer-link" href="#contact">Contact</a>
+                    <a class="footer-link" href="https://equasec.co.za/login" target="_blank" rel="noopener">Portal Login</a>
+                    <a class="footer-link" href="#">Back to top</a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-title">Get In Touch</div>
+                <div class="footer-links">
+                    <a class="footer-link" href="#contact">Book a demo</a>
+                    <a class="footer-link" href="https://wa.me/27662737455" target="_blank" rel="noopener">WhatsApp</a>
+                    <span class="footer-meta">Johannesburg, South Africa</span>
+                    <span class="footer-meta">A product of EquaMeridian Holdings</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <p>A PRODUCT OF EQUAMERIDIAN HOLDINGS</p>
+            <div class="footer-meta">&copy; 2026 EquaMeridian Holdings. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        const siteNav = document.getElementById('site-nav');
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const faqItems = document.querySelectorAll('.faq-item');
+        const revealItems = document.querySelectorAll('.reveal');
+        const testimonialTrack = document.getElementById('testimonial-track');
+        const testimonialPrev = document.getElementById('testimonial-prev');
+        const testimonialNext = document.getElementById('testimonial-next');
+        const testimonialDots = document.querySelectorAll('#testimonial-dots .testimonial-dot');
+        const benefitsTrack = document.getElementById('benefits-track');
+        const benefitsPrev = document.getElementById('benefits-prev');
+        const benefitsNext = document.getElementById('benefits-next');
+        const benefitsDots = document.querySelectorAll('#benefits-dots .testimonial-dot');
+        const contactForm = document.getElementById('contact-form');
+        const overviewVideo = document.getElementById('overview-video');
+        const overviewVideoOverlay = document.getElementById('overview-video-overlay');
+
+        if (siteNav && navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = siteNav.classList.toggle('nav-open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+                navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+            });
+
+            navLinks.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    siteNav.classList.remove('nav-open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navToggle.setAttribute('aria-label', 'Open navigation menu');
+                });
+            });
+        }
+
+        faqItems.forEach((item) => {
+            const button = item.querySelector('.faq-question');
+            if (!button) {
+                return;
+            }
+
+            button.addEventListener('click', () => {
+                const isOpen = item.classList.toggle('is-open');
+                button.setAttribute('aria-expanded', String(isOpen));
+            });
+        });
+
+        if (testimonialTrack && testimonialPrev && testimonialNext && testimonialDots.length) {
+            let testimonialIndex = 0;
+            let testimonialTimer;
+            const testimonialCount = testimonialDots.length;
+
+            const updateTestimonialSlider = () => {
+                testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+                testimonialDots.forEach((dot, index) => {
+                    const isActive = index === testimonialIndex;
+                    dot.classList.toggle('is-active', isActive);
+                    dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+                });
+            };
+
+            const goToTestimonial = (index) => {
+                testimonialIndex = (index + testimonialCount) % testimonialCount;
+                updateTestimonialSlider();
+            };
+
+            const restartTestimonialTimer = () => {
+                window.clearInterval(testimonialTimer);
+                testimonialTimer = window.setInterval(() => {
+                    goToTestimonial(testimonialIndex + 1);
+                }, 6000);
+            };
+
+            testimonialPrev.addEventListener('click', () => {
+                goToTestimonial(testimonialIndex - 1);
+                restartTestimonialTimer();
+            });
+
+            testimonialNext.addEventListener('click', () => {
+                goToTestimonial(testimonialIndex + 1);
+                restartTestimonialTimer();
+            });
+
+            testimonialDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToTestimonial(index);
+                    restartTestimonialTimer();
+                });
+            });
+
+            updateTestimonialSlider();
+            restartTestimonialTimer();
+        }
+
+        if (benefitsTrack && benefitsPrev && benefitsNext && benefitsDots.length) {
+            let benefitsIndex = 0;
+            let benefitsTimer;
+            const benefitsCount = benefitsDots.length;
+
+            const updateBenefitsSlider = () => {
+                benefitsTrack.style.transform = `translateX(-${benefitsIndex * 100}%)`;
+                benefitsDots.forEach((dot, index) => {
+                    const isActive = index === benefitsIndex;
+                    dot.classList.toggle('is-active', isActive);
+                    dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+                });
+            };
+
+            const goToBenefit = (index) => {
+                benefitsIndex = (index + benefitsCount) % benefitsCount;
+                updateBenefitsSlider();
+            };
+
+            const restartBenefitsTimer = () => {
+                window.clearInterval(benefitsTimer);
+                benefitsTimer = window.setInterval(() => {
+                    goToBenefit(benefitsIndex + 1);
+                }, 5500);
+            };
+
+            benefitsPrev.addEventListener('click', () => {
+                goToBenefit(benefitsIndex - 1);
+                restartBenefitsTimer();
+            });
+
+            benefitsNext.addEventListener('click', () => {
+                goToBenefit(benefitsIndex + 1);
+                restartBenefitsTimer();
+            });
+
+            benefitsDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToBenefit(index);
+                    restartBenefitsTimer();
+                });
+            });
+
+            updateBenefitsSlider();
+            restartBenefitsTimer();
+        }
+
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.14 });
+
+            revealItems.forEach((item) => revealObserver.observe(item));
+        } else {
+            revealItems.forEach((item) => item.classList.add('is-visible'));
+        }
+
+        if (overviewVideo && overviewVideoOverlay) {
+            const playOverviewVideo = () => {
+                overviewVideoOverlay.classList.add('is-hidden');
+                overviewVideo.play();
+            };
+
+            overviewVideoOverlay.addEventListener('click', playOverviewVideo);
+            overviewVideoOverlay.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    playOverviewVideo();
+                }
+            });
+
+            overviewVideo.addEventListener('pause', () => {
+                if (overviewVideo.currentTime < overviewVideo.duration) {
+                    overviewVideoOverlay.classList.remove('is-hidden');
+                }
+            });
+
+            overviewVideo.addEventListener('ended', () => {
+                overviewVideoOverlay.classList.remove('is-hidden');
+            });
+
+            overviewVideo.addEventListener('play', () => {
+                overviewVideoOverlay.classList.add('is-hidden');
+            });
+        }
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(contactForm);
+                const service = formData.get('serviceRequired') || 'General inquiry';
+                const fullName = formData.get('fullName') || '';
+                const countryCode = formData.get('countryCode') || '';
+                const phoneNumber = formData.get('phoneNumber') || '';
+                const inquiryDetails = formData.get('inquiryDetails') || '';
+
+                const subject = encodeURIComponent(`EquaSec Enquiry: ${service}`);
+                const body = encodeURIComponent([
+                    `Full Name: ${fullName}`,
+                    `Service Required: ${service}`,
+                    `Phone Number: ${countryCode} ${phoneNumber}`,
+                    '',
+                    'Inquiry Details:',
+                    inquiryDetails
+                ].join('\n'));
+
+                window.location.href = `mailto:kkpartners@equameridianholdings.com?subject=${subject}&body=${body}`;
+            });
+        }
+    </script>
+
+</body>
+</html>
