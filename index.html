@@ -41,12 +41,13 @@
         </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EquaSec | A Subsidiary of EquaMeridian</title>
+    <meta name="google-site-verification" content="waoLSN32iTlgFl1sbQ_dI_pJ2XO0g_3uc3n4923uSEU" />
+    <title>EquaSec | A Product of Equatec</title>
     <style>
         :root {
             --pure-white: #ffffff;
             --off-white: #f9f9f9;
-            --gold-accent: #c5a059; /* Matching the EquaMeridian Gold */
+            --gold-accent: #c5a059; /* Matching the Equatec gold */
             --deep-black: #1a1a1a;
             --text-gray: #4a4a4a;
             --border-light: #e0e0e0;
@@ -1863,7 +1864,10 @@
                 <div style="text-align: center; color: var(--text-gray); margin-bottom: 22px; font-size: 1.02rem; line-height: 1.7;">
                     Request a demo, ask for a quote, or speak to us about how EquaSec can support your residents, management team, and security operation.
                 </div>
-                <form id="contact-form" class="contact-form">
+                <form id="contact-form" class="contact-form" action="https://formsubmit.co/kkpartners@equameridianholdings.com" method="POST">
+                    <input type="hidden" name="_subject" value="New EquaSec Website Enquiry">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
                     <div>
                         <label class="contact-label" for="full-name">FULL NAME</label>
                         <input id="full-name" name="fullName" class="contact-control" type="text" placeholder="John Doe" required>
@@ -1925,14 +1929,14 @@
                     <a class="footer-link" href="#contact">Book a demo</a>
                     <a class="footer-link" href="https://wa.me/27662737455" target="_blank" rel="noopener">WhatsApp</a>
                     <span class="footer-meta">Johannesburg, South Africa</span>
-                    <span class="footer-meta">A product of EquaMeridian Holdings</span>
+                    <span class="footer-meta">A product of Equatec</span>
                 </div>
             </div>
         </div>
         <div class="footer-divider"></div>
         <div class="footer-bottom">
-            <p>A PRODUCT OF EQUAMERIDIAN HOLDINGS</p>
-            <div class="footer-meta">&copy; 2026 EquaMeridian Holdings. All Rights Reserved.</div>
+            <p>A PRODUCT OF EQUATEC</p>
+            <div class="footer-meta">&copy; 2026 Equatec. All Rights Reserved.</div>
         </div>
     </footer>
 
@@ -2121,27 +2125,14 @@
         }
 
         if (contactForm) {
-            contactForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-
-                const formData = new FormData(contactForm);
-                const service = formData.get('serviceRequired') || 'General inquiry';
-                const fullName = formData.get('fullName') || '';
-                const countryCode = formData.get('countryCode') || '';
-                const phoneNumber = formData.get('phoneNumber') || '';
-                const inquiryDetails = formData.get('inquiryDetails') || '';
-
-                const subject = encodeURIComponent(`EquaSec Enquiry: ${service}`);
-                const body = encodeURIComponent([
-                    `Full Name: ${fullName}`,
-                    `Service Required: ${service}`,
-                    `Phone Number: ${countryCode} ${phoneNumber}`,
-                    '',
-                    'Inquiry Details:',
-                    inquiryDetails
-                ].join('\n'));
-
-                window.location.href = `mailto:kkpartners@equameridianholdings.com?subject=${subject}&body=${body}`;
+            contactForm.addEventListener('submit', () => {
+                const selectedService = contactForm.querySelector('#service-required');
+                if (selectedService && selectedService.value) {
+                    const subjectInput = contactForm.querySelector('input[name="_subject"]');
+                    if (subjectInput) {
+                        subjectInput.value = `EquaSec Enquiry: ${selectedService.value}`;
+                    }
+                }
             });
         }
     </script>
