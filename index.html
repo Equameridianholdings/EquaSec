@@ -37,28 +37,44 @@
                 text-shadow: 0 2px 12px rgba(0,0,0,0.45);
                 max-width: 860px;
                 margin: 0 auto;
+                padding: 34px 34px 30px;
+                border-radius: 24px;
+                background: linear-gradient(135deg, rgba(10, 10, 10, 0.32), rgba(28, 28, 28, 0.15));
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(5px);
             }
         </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="waoLSN32iTlgFl1sbQ_dI_pJ2XO0g_3uc3n4923uSEU" />
     <title>EquaSec | A Product of Equatec</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --pure-white: #ffffff;
-            --off-white: #f9f9f9;
-            --gold-accent: #c5a059; /* Matching the Equatec gold */
-            --deep-black: #1a1a1a;
-            --text-gray: #4a4a4a;
-            --border-light: #e0e0e0;
+            --off-white: #f8f7f4;
+            --gold-accent: #b8924d;
+            --gold-accent-soft: #d7bc86;
+            --deep-black: #131313;
+            --text-gray: #50545d;
+            --border-light: #dfddd8;
+            --ink-blue: #1b2635;
+            --surface-soft: #fcfbf8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-            background-color: var(--pure-white); 
+            font-family: 'Manrope', 'Segoe UI', sans-serif;
+            background:
+                radial-gradient(circle at 8% -2%, rgba(184, 146, 77, 0.13), transparent 36%),
+                radial-gradient(circle at 94% 18%, rgba(27, 38, 53, 0.08), transparent 38%),
+                var(--pure-white);
             color: var(--deep-black); 
             line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
         /* Hero Section with Video/Image background feel */
@@ -98,10 +114,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid rgba(184, 146, 77, 0.2);
             position: sticky;
             top: 0;
-            background: var(--pure-white);
+            background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.78));
+            backdrop-filter: blur(10px);
             z-index: 1000;
         }
         .logo { font-weight: bold; font-size: 1.5rem; letter-spacing: 2px; }
@@ -134,6 +151,7 @@
             font-size: 1.5rem;
             letter-spacing: 2px;
             color: inherit;
+            font-family: 'Fraunces', Georgia, serif;
         }
         .nav-links {
             display: flex;
@@ -186,18 +204,31 @@
         .nav-link {
             color: inherit;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.76rem;
+            transition: color 0.2s ease;
+        }
+        .nav-link:hover {
+            color: var(--gold-accent);
         }
         .nav-link-cta {
             padding: 11px 18px;
-            border: 1px solid var(--deep-black);
+            border: 1px solid var(--gold-accent);
             letter-spacing: 0.08em;
             text-transform: uppercase;
             font-size: 0.82rem;
+            color: #fff;
+            background: linear-gradient(135deg, var(--gold-accent), var(--gold-accent-soft));
+            box-shadow: 0 8px 20px rgba(184, 146, 77, 0.28);
+        }
+        .nav-link-cta:hover {
+            color: #fff;
         }
 
         /* Content Sections */
-        .section { padding: 80px 10%; background: var(--pure-white); }
+        .section { padding: 92px 10%; background: var(--pure-white); }
         .section-alt { background: var(--off-white); }
         .section-tone-sand {
             background: linear-gradient(180deg, #fbf8f1 0%, #ffffff 100%);
@@ -211,6 +242,86 @@
         .section-tone-slate {
             background: linear-gradient(180deg, #f4f6f8 0%, #ffffff 100%);
         }
+        
+        .tech-foundation-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            z-index: 0;
+            opacity: 1;
+            pointer-events: none;
+            filter: brightness(0.55);
+        }
+
+        #technology {
+            position: relative;
+            overflow: hidden;
+            min-height: 68vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 10% !important;
+        }
+
+        #technology::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.35));
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #technology .section-title {
+            color: var(--pure-white);
+            text-shadow: 0 3px 16px rgba(0,0,0,0.45);
+        }
+
+        #technology .section-intro {
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+        }
+
+        #technology .integration-card {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(8px);
+        }
+
+        #technology .integration-card strong {
+            color: var(--gold-accent);
+        }
+
+        #technology .integration-card p {
+            color: var(--text-gray);
+        }
+
+        #technology .tech-foundation-shell {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 22px;
+            border-radius: 20px;
+            background: rgba(11, 15, 22, 0.22);
+            backdrop-filter: blur(3px);
+        }
+
+        #technology .tech-foundation-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+            gap: 32px;
+            align-items: center;
+            justify-content: center;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
         .section-tone-warm {
             background: linear-gradient(180deg, #f8f4ec 0%, #ffffff 100%);
         }
@@ -228,11 +339,14 @@
         }
 
         .section-title { 
-            font-size: 2rem; 
+            font-size: 2.15rem; 
             text-transform: uppercase; 
-            letter-spacing: 3px; 
+            letter-spacing: 0.1em; 
             margin-bottom: 50px; 
             text-align: center;
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 600;
+            color: var(--ink-blue);
         }
         .section-intro {
             max-width: 860px;
@@ -242,16 +356,44 @@
             font-size: 1.08rem;
         }
 
+        .section-soft-label {
+            display: inline-block;
+            margin: 0 auto 18px;
+            padding: 5px 12px;
+            border: 1px solid rgba(184, 146, 77, 0.28);
+            border-radius: 999px;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-accent);
+            background: rgba(184, 146, 77, 0.06);
+        }
+
+        .section-intro-subtle {
+            max-width: 760px;
+            margin: 0 auto 32px;
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            opacity: 0.82;
+        }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         
         .card { 
             padding: 40px; 
-            border: 1px solid var(--border-light);
-            transition: 0.4s;
+            border: 1px solid rgba(184, 146, 77, 0.24);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
             background: var(--pure-white);
+            border-radius: 18px;
+            box-shadow: 0 14px 30px rgba(14, 20, 30, 0.07);
         }
 
-        .card:hover { border-color: var(--gold-accent); }
+        .card:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 44px rgba(14, 20, 30, 0.12);
+        }
         .card h3 { color: var(--gold-accent); text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px; }
 
         /* Buttons */
@@ -324,11 +466,35 @@
         }
 
         .footer-link {
+            color: rgba(255,255,255,0.76);
             text-decoration: none;
+            transition: color 0.2s ease;
         }
 
         .footer-link:hover {
             color: #fff;
+        }
+
+        .footer-links-contact .footer-link {
+            color: var(--gold-accent-soft);
+            text-decoration-line: underline;
+            text-decoration-thickness: 1.5px;
+            text-underline-offset: 3px;
+            text-decoration-color: rgba(215, 188, 134, 0.65);
+            transition: color 0.2s ease, text-decoration-color 0.2s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .footer-links-contact .footer-link:hover {
+            color: #fff;
+            text-decoration-color: rgba(255, 255, 255, 0.9);
+            transform: translateX(1px);
+        }
+
+        .footer-link:focus-visible {
+            outline: 2px solid rgba(215, 188, 134, 0.85);
+            outline-offset: 2px;
+            border-radius: 2px;
         }
 
         .footer-divider {
@@ -353,18 +519,21 @@
 
         .eyebrow {
             letter-spacing: 0.35em;
-            font-size: 1.05rem;
-            font-weight: 700;
-            opacity: 0.85;
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0.92;
             margin-bottom: 18px;
             text-transform: uppercase;
+            color: rgba(255,255,255,0.9);
         }
 
         .hero-title {
             font-size: clamp(2.5rem, 5vw, 4.25rem);
-            font-weight: 700;
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 600;
             line-height: 1.05;
             margin-bottom: 18px;
+            letter-spacing: 0.01em;
         }
 
         .hero-description {
@@ -430,17 +599,20 @@
             text-transform: uppercase;
             letter-spacing: 0.12em;
             font-size: 0.85rem;
-            transition: 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            border-radius: 999px;
+            font-weight: 700;
         }
 
         .primary-btn {
-            background: var(--gold-accent);
+            background: linear-gradient(135deg, var(--gold-accent), var(--gold-accent-soft));
             color: #fff;
             border: 1px solid var(--gold-accent);
+            box-shadow: 0 10px 24px rgba(184, 146, 77, 0.34);
         }
 
         .secondary-btn {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.14);
             color: #fff;
             border: 1px solid rgba(255,255,255,0.45);
             backdrop-filter: blur(3px);
@@ -459,12 +631,90 @@
             margin-top: 24px;
         }
 
+        .luxury-manifesto {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .luxury-intro-panel,
+        .luxury-pillars {
+            background: linear-gradient(165deg, #ffffff, #fcfaf5);
+            border: 1px solid rgba(184, 146, 77, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 16px 36px rgba(14,20,30,0.09);
+            padding: 32px 30px;
+        }
+
+        .luxury-kicker {
+            display: inline-flex;
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(184, 146, 77, 0.35);
+            color: var(--gold-accent);
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 14px;
+            background: rgba(184, 146, 77, 0.08);
+        }
+
+        .luxury-intro-title {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: clamp(1.7rem, 3vw, 2.3rem);
+            line-height: 1.2;
+            color: var(--ink-blue);
+            margin-bottom: 14px;
+        }
+
+        .luxury-intro-copy {
+            color: var(--text-gray);
+            margin-bottom: 18px;
+        }
+
+        .luxury-pillars {
+            display: grid;
+            gap: 14px;
+        }
+
+        .luxury-pillar {
+            padding: 14px 14px 14px 16px;
+            border-left: 3px solid var(--gold-accent);
+            background: rgba(255,255,255,0.72);
+            border-radius: 10px;
+        }
+
+        .luxury-pillar strong {
+            display: block;
+            color: var(--ink-blue);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.84rem;
+            margin-bottom: 4px;
+        }
+
+        .luxury-pillar span {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
         .feature-card {
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            background: linear-gradient(180deg, #ffffff, var(--surface-soft));
+            border-radius: 16px;
+            border: 1px solid rgba(184, 146, 77, 0.2);
+            box-shadow: 0 12px 28px rgba(14,20,30,0.08);
             padding: 36px 28px;
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 38px rgba(14,20,30,0.12);
         }
 
         .feature-icon {
@@ -513,7 +763,13 @@
             border: 1px solid var(--border-light);
             border-radius: 16px;
             padding: 30px 24px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 24px rgba(14,20,30,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .how-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 34px rgba(14,20,30,0.1);
         }
 
         .how-number {
@@ -548,133 +804,18 @@
             margin: 0 auto;
         }
 
-        .portal-embed-wrap {
-            max-width: 1120px;
-            margin: 0 auto;
-            display: grid;
-            gap: 26px;
-            justify-items: center;
-        }
-
-        .portal-embed-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-            padding: 18px 22px;
-            border: 1px solid var(--border-light);
-            background: #fcfcfc;
-            border-radius: 20px;
-            flex-wrap: wrap;
-            width: min(100%, 920px);
-            box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-        }
-
-        .portal-embed-head strong {
-            font-size: 1rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .portal-embed-head span {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
-
-        .portal-embed-actions {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .portal-credentials {
-            width: min(100%, 920px);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-            padding: 22px;
-            border: 1px solid rgba(197, 160, 89, 0.28);
-            border-radius: 20px;
-            background: linear-gradient(135deg, #fffaf0, #ffffff);
-            box-shadow: 0 14px 34px rgba(0,0,0,0.06);
-        }
-
-        .portal-credentials-copy {
-            color: var(--text-gray);
-        }
-
-        .portal-credentials-copy strong {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--deep-black);
-            font-size: 1rem;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
-
-        .portal-credentials-copy p {
-            margin: 0;
-            line-height: 1.7;
-        }
-
-        .portal-credentials-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .portal-credential-item {
-            padding: 14px 16px;
-            border-radius: 14px;
-            background: #fff;
-            border: 1px solid var(--border-light);
-        }
-
-        .portal-credential-item span {
-            display: block;
-            font-size: 0.82rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--gold-accent);
-            margin-bottom: 6px;
-        }
-
-        .portal-credential-item strong {
-            display: block;
-            color: var(--deep-black);
-            font-size: 1rem;
-            word-break: break-word;
-        }
-
-        .portal-embed-link {
-            color: var(--gold-accent);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .portal-embed-frame {
-            width: 100%;
-            max-width: 920px;
-            height: 760px;
-            border: none;
-            background: #fff;
-            display: block;
-            border-radius: 20px;
-            box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .portal-embed-frame::-webkit-scrollbar {
-            display: none;
-        }
-
         .integration-card {
-            background: #fff;
-            border: 1px solid var(--border-light);
+            background: linear-gradient(180deg, #ffffff, #fdfbf6);
+            border: 1px solid rgba(184, 146, 77, 0.2);
             border-radius: 16px;
             padding: 26px 22px;
-            box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+            box-shadow: 0 12px 30px rgba(14,20,30,0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .integration-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 36px rgba(14,20,30,0.11);
         }
 
         .integration-card strong {
@@ -689,6 +830,39 @@
         .integration-card p {
             color: var(--text-gray);
             font-size: 0.98rem;
+        }
+
+        .service-highlight {
+            max-width: 1040px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #ffffff, #fcfaf4);
+            border: 1px solid rgba(184, 146, 77, 0.24);
+            border-radius: 18px;
+            padding: 34px 28px;
+            box-shadow: 0 16px 34px rgba(14,20,30,0.08);
+        }
+
+        .service-highlight h3 {
+            color: var(--gold-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 14px;
+        }
+
+        .service-highlight p {
+            color: var(--text-gray);
+            margin-bottom: 16px;
+        }
+
+        .service-points {
+            margin: 0 0 18px;
+            padding-left: 18px;
+            color: var(--deep-black);
+            line-height: 1.85;
+        }
+
+        .service-points li {
+            margin-bottom: 4px;
         }
 
         .testimonial-slider {
@@ -725,7 +899,7 @@
             width: 46px;
             height: 46px;
             border-radius: 50%;
-            border: 1px solid var(--border-light);
+            border: 1px solid rgba(184, 146, 77, 0.3);
             background: #fff;
             color: var(--deep-black);
             font-size: 1.2rem;
@@ -733,7 +907,13 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 22px rgba(14,20,30,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .testimonial-arrow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(14,20,30,0.14);
         }
 
         .testimonial-dots {
@@ -758,11 +938,11 @@
         }
 
         .testimonial-card {
-            background: #fff;
+            background: linear-gradient(180deg, #ffffff, #fbfaf7);
             border-radius: 16px;
             padding: 30px 26px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 14px 32px rgba(14,20,30,0.09);
+            border: 1px solid rgba(184, 146, 77, 0.2);
             max-width: 860px;
             margin: 0 auto;
         }
@@ -881,7 +1061,7 @@
         .cta-banner {
             max-width: 1120px;
             margin: 0 auto;
-            background: linear-gradient(135deg, #141414, #272727);
+            background: radial-gradient(circle at 16% 8%, rgba(184, 146, 77, 0.28), transparent 42%), linear-gradient(135deg, #11161f, #1f2b3a);
             color: #fff;
             border-radius: 22px;
             padding: 38px 34px;
@@ -889,7 +1069,8 @@
             grid-template-columns: minmax(0, 1fr) auto;
             gap: 24px;
             align-items: center;
-            box-shadow: 0 24px 44px rgba(0,0,0,0.16);
+            border: 1px solid rgba(255,255,255,0.22);
+            box-shadow: 0 24px 46px rgba(10,16,24,0.28);
         }
 
         .cta-banner h3 {
@@ -921,11 +1102,11 @@
         }
 
         .faq-item {
-            background: #fff;
-            border: 1px solid var(--border-light);
+            background: linear-gradient(180deg, #ffffff, #fcfbf8);
+            border: 1px solid rgba(184, 146, 77, 0.2);
             border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+            box-shadow: 0 10px 24px rgba(14,20,30,0.07);
         }
 
         .faq-question {
@@ -984,8 +1165,15 @@
             padding-top: 30px;
         }
 
+        .overview-video-section .section-intro {
+            font-size: 0.96rem;
+            max-width: 700px;
+            margin-bottom: 26px;
+            opacity: 0.86;
+        }
+
         .overview-video-wrap {
-            max-width: 1100px;
+            max-width: 760px;
             margin: 0 auto;
         }
 
@@ -1022,13 +1210,13 @@
         }
 
         .overview-video-play {
-            width: 92px;
-            height: 92px;
+            width: 74px;
+            height: 74px;
             border-radius: 50%;
             border: none;
             background: rgba(197, 160, 89, 0.96);
             color: #fff;
-            font-size: 2rem;
+            font-size: 1.55rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -1037,18 +1225,21 @@
         }
 
         .overview-video-caption {
-            margin-top: 18px;
+            margin-top: 12px;
             text-align: center;
             color: var(--text-gray);
-            font-size: 1rem;
+            font-size: 0.82rem;
+            opacity: 0.72;
+            letter-spacing: 0.03em;
         }
 
         .pricing-card {
             flex: 1 1 320px;
             min-width: 280px;
-            background: #fff;
+            background: linear-gradient(180deg, #ffffff, #fdfbf5);
             border-radius: 14px;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            border: 1px solid rgba(184, 146, 77, 0.24);
+            box-shadow: 0 14px 32px rgba(14,20,30,0.09);
             padding: 36px 28px;
             text-align: center;
         }
@@ -1064,9 +1255,10 @@
 
         .contact-panel,
         .contact-sidebar {
-            background: #fff;
+            background: linear-gradient(180deg, #ffffff, #fcfbf8);
             border-radius: 12px;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            border: 1px solid rgba(184, 146, 77, 0.2);
+            box-shadow: 0 12px 28px rgba(14,20,30,0.08);
             padding: 32px 28px;
         }
 
@@ -1139,15 +1331,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 86px;
-            height: 86px;
+            width: 62px;
+            height: 62px;
             border-radius: 50%;
             background: rgba(197, 160, 89, 0.94);
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.35rem;
             transition: transform 0.25s ease;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22);
         }
@@ -1345,6 +1537,19 @@
                 grid-template-columns: 1fr;
             }
 
+            .luxury-manifesto {
+                grid-template-columns: 1fr;
+            }
+
+            #technology .tech-foundation-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            #technology .tech-foundation-shell {
+                padding: 16px;
+            }
+
             .footer-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -1379,9 +1584,9 @@
         </button>
         <div id="nav-links" class="nav-links">
             <a href="#solutions" class="nav-link">Solutions</a>
+            <a href="#positioning" class="nav-link">Technology</a>
             <a href="#pricing" class="nav-link">Pricing</a>
             <a href="#contact" class="nav-link">Contact</a>
-            <a href="https://equasec.co.za/login" target="_blank" rel="noopener" class="nav-link">Portal</a>
             <a href="#contact" class="nav-link nav-link-cta">Book a Demo</a>
         </div>
     </nav>
@@ -1394,17 +1599,17 @@
             <video class="hero-bg-video" src="istockphoto-1616235399-640_adpp_is.mp4" autoplay loop muted playsinline></video>
         </div>
         <div class="hero-content">
-            <div class="eyebrow">SMART ESTATE SECURITY PLATFORM</div>
+            <div class="eyebrow">SECURITY TECHNOLOGY INFRASTRUCTURE</div>
             <div class="hero-title">
-                Connected Access.<br>Safer Communities.
+                Security Technology.<br>Smarter Access.
             </div>
             <div class="hero-description">
-                EquaSec brings residents, estate management, and security teams onto one modern platform for access control, visitor management, communication, and rapid response. <br>
-                Built for estates that want fewer delays, clearer oversight, and a better daily experience for everyone on site.
+                EquaSec provides software and integrated access-control technology for estates, business sites, and managed communities. <br>
+                We make daily access operations easier, faster, and safer through apps, automation, biometrics, keypads, and communication tools without providing on-site security personnel.
             </div>
             <div class="hero-actions">
                 <a href="#contact" class="primary-btn">Request a Demo</a>
-                <a href="#solutions" class="secondary-btn">Explore the Platform</a>
+                <a href="#positioning" class="secondary-btn">Explore the Platform</a>
             </div>
         </div>
         <script>
@@ -1426,12 +1631,12 @@
                 <span>complexes already using EquaSec</span>
             </div>
             <div class="trust-stat">
-                <strong>0</strong>
+                <strong>R0.00</strong>
                 <span>mandatory hardware cost to get started</span>
             </div>
             <div class="trust-stat">
                 <strong>1</strong>
-                <span>platform for residents, guards, and management</span>
+                <span>platform for residents, operations teams, and management</span>
             </div>
             <div class="trust-stat">
                 <strong>24/7</strong>
@@ -1440,8 +1645,33 @@
         </div>
     </section>
 
+    <section id="positioning" class="section section-tone-cream section-panel reveal">
+        <div class="luxury-manifesto">
+            <div class="luxury-intro-panel">
+                <span class="luxury-kicker">Technology Positioning</span>
+                <h2 class="luxury-intro-title">A Premium Access Technology Partner, Not a Guarding Company</h2>
+                <p class="luxury-intro-copy">EquaSec delivers the digital and physical technology layer that makes controlled access easier, safer, and more accountable. We build the platform, integrations, and infrastructure that empower your existing estate or facility teams to operate at a higher standard.</p>
+                <p class="luxury-intro-copy">Start software-first with R0 mandatory hardware costs, then scale into biometric devices, keypads, time and attendance hardware, and advanced integrations as your site evolves.</p>
+            </div>
+            <div class="luxury-pillars">
+                <div class="luxury-pillar">
+                    <strong>Software-First Core</strong>
+                    <span>Access apps, visitor workflows, communication tools, and operational visibility from one platform.</span>
+                </div>
+                <div class="luxury-pillar">
+                    <strong>Hardware-Ready Architecture</strong>
+                    <span>Biometric, keypad, and device integrations when your rollout requires physical access points.</span>
+                </div>
+                <div class="luxury-pillar">
+                    <strong>Infrastructure and Enablement</strong>
+                    <span>Implementation, onboarding, and technical support for your in-house operations teams.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="solutions" class="section section-tone-sand section-panel reveal">
-        <h2 class="section-title">Built for Residents, Management, and Security</h2>
+        <h2 class="section-title">Platform Experience</h2>
         <div style="display: flex; justify-content: center; margin-bottom: 40px;">
             <div class="video-thumbnail-grid">
                 <a class="video-thumbnail" href="https://youtube.com/shorts/4SnDqrpomcQ?feature=share" target="_blank" rel="noopener" aria-label="Watch EquaSec resident view video on YouTube">
@@ -1452,18 +1682,18 @@
                         <span>Preview the resident experience for visitor access and community interaction.</span>
                     </span>
                 </a>
-                <a class="video-thumbnail" href="https://youtu.be/dZf8IQqhmbI" target="_blank" rel="noopener" aria-label="Watch EquaSec guard portal video on YouTube">
-                    <img src="https://img.youtube.com/vi/dZf8IQqhmbI/hqdefault.jpg" alt="EquaSec guard portal YouTube video thumbnail">
+                <a class="video-thumbnail" href="https://youtu.be/dZf8IQqhmbI" target="_blank" rel="noopener" aria-label="Watch EquaSec operations portal video on YouTube">
+                    <img src="https://img.youtube.com/vi/dZf8IQqhmbI/hqdefault.jpg" alt="EquaSec operations portal YouTube video thumbnail">
                     <span class="video-thumbnail-play" aria-hidden="true">▶</span>
                     <span class="video-thumbnail-caption">
-                        <strong>Security Guard View</strong>
-                        <span>Preview the guard portal workflow for secure entry and real-time control.</span>
+                        <strong>Operations View</strong>
+                        <span>Preview the operations portal workflow for secure entry and real-time control.</span>
                     </span>
                 </a>
             </div>
         </div>
         <div class="section-intro">
-            EquaSec simplifies how modern estates control entry, manage visitors, communicate with residents, and support on-site security teams. The platform is designed to reduce manual processes, improve response times, and give every stakeholder clear visibility.
+            EquaSec simplifies how modern estates control entry, manage visitors, communicate with residents, and run access operations. This showcased solution is software-based, with R0 mandatory hardware costs to get started, while still allowing hardware integration where your site requires it.
         </div>
         <div class="feature-grid">
             <div class="feature-card">
@@ -1471,21 +1701,21 @@
                     <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4z"></path><path d="M14 20h6v-9h-6z"></path><path d="M14 10h6V4h-6z"></path><path d="M4 20h6v-3H4z"></path></svg>
                 </div>
                 <h3>Centralized Security Dashboard</h3>
-                <p>Monitor visitor activity, entry trends, site operations, and security performance from one clear control center.</p>
+                <p>Monitor visitor activity, entry trends, patrol checkpoint logs, and scan events at key points from one clear control center.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"></path><path d="M9.5 12.5l1.8 1.8 3.7-4"></path></svg>
                 </div>
-                <h3>Automated Guard Management</h3>
-                <p>Equip security teams with structured workflows, controlled permissions, guard movement monitoring, and faster handling at every access point.</p>
+                <h3>Automated Access Operations</h3>
+                <p>Equip estate and facility operations teams with structured workflows, controlled permissions, activity visibility, and faster handling at every access point.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><path d="M4 6h16v10H8l-4 4z"></path><path d="M8 10h8"></path><path d="M8 13h5"></path></svg>
                 </div>
                 <h3>Live Chat & Notifications</h3>
-                <p>Keep residents, security, and management aligned with direct updates, alerts, and fast communication when it matters.</p>
+                <p>Keep residents, access teams, and management aligned with direct updates, including instant notifications when a visitor has arrived at the gate.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon" aria-hidden="true">
@@ -1507,7 +1737,7 @@
     <section class="section overview-video-section section-tone-slate section-panel reveal">
         <h2 class="section-title">Platform Overview</h2>
         <div class="section-intro">
-            This overview video explains the full EquaSec picture, from resident convenience and visitor management to guard workflows and estate-wide control.
+            See the full EquaSec picture first, then hear directly from live estates using the platform for visitor workflows, gate verification, and daily access operations.
         </div>
         <div class="overview-video-wrap">
             <div class="overview-video-frame">
@@ -1520,15 +1750,14 @@
                 </div>
             </div>
             <div class="overview-video-caption">
-                Watch the full EquaSec overview directly on the page.
+                Optional EquaSec walkthrough video, generated using AI.
             </div>
         </div>
-    </section>
-
-    <section class="section section-tone-cream section-panel reveal">
-        <h2 class="section-title">Testimonials</h2>
-        <div class="section-intro">
-            Feedback from live residential environments using EquaSec for visitor management, gate verification, and day-to-day estate operations.
+        <div style="text-align: center; margin-top: 56px;">
+            <div class="section-soft-label">Client Voice</div>
+        </div>
+        <div class="section-intro-subtle">
+            Experiences from live estates using EquaSec for visitor management, gate verification, and daily access operations.
         </div>
         <div class="testimonial-slider" id="testimonial-slider">
             <div class="testimonial-viewport">
@@ -1536,7 +1765,6 @@
                     <div class="testimonial-slide">
                         <div class="testimonial-card">
                             <div class="testimonial-header">
-                                <img class="testimonial-avatar testimonial-avatar-portrait" src="Screenshot 2026-04-10 094914.png" alt="Estate Operations Lead">
                                 <div class="testimonial-meta">
                                     <div class="testimonial-stars" aria-label="4.5 out of 5 stars">
                                         <span class="star">★</span>
@@ -1549,13 +1777,12 @@
                                     <div class="testimonial-role">Residential Complex</div>
                                 </div>
                             </div>
-                            <div class="testimonial-quote">“EquaSec helped us move away from gate-book confusion and manual confirmations. The process is cleaner for residents and much easier for our guards to manage.”</div>
+                            <div class="testimonial-quote">“EquaSec helped us move away from gate-book confusion and manual confirmations. The process is cleaner for residents and much easier for our access team to manage.”</div>
                         </div>
                     </div>
                     <div class="testimonial-slide">
                         <div class="testimonial-card">
                             <div class="testimonial-header">
-                                <img class="testimonial-avatar testimonial-avatar-portrait" src="Screenshot 2026-04-10 094938.png" alt="Security Supervisor">
                                 <div class="testimonial-meta">
                                     <div class="testimonial-stars" aria-label="4 out of 5 stars">
                                         <span class="star">★</span>
@@ -1568,13 +1795,12 @@
                                     <div class="testimonial-role">Managed Community</div>
                                 </div>
                             </div>
-                            <div class="testimonial-quote">“The ability to verify visitors and vehicles from the guard room has made entry control faster and more secure. It removes a lot of uncertainty at the gate.”</div>
+                            <div class="testimonial-quote">“The ability to verify visitors and vehicles from one portal has made entry control faster and more secure. It removes a lot of uncertainty at the gate.”</div>
                         </div>
                     </div>
                     <div class="testimonial-slide">
                         <div class="testimonial-card">
                             <div class="testimonial-header">
-                                <img class="testimonial-avatar testimonial-avatar-portrait" src="Screenshot 2026-04-10 095001.png" alt="Property Management Team">
                                 <div class="testimonial-meta">
                                     <div class="testimonial-stars" aria-label="3.5 out of 5 stars">
                                         <span class="star">★</span>
@@ -1607,7 +1833,7 @@
     <section class="section section-tone-blue section-panel reveal">
         <h2 class="section-title">How EquaSec Works</h2>
         <div class="section-intro">
-            The platform keeps the process structured before a visitor arrives, while they are at the gate, and after entry has been approved. That means less uncertainty for guards, less friction for residents, and stronger control for estate management.
+            The platform keeps the process structured before a visitor arrives, while they are at the gate, and after entry has been approved. That means less uncertainty for gate operations teams, less friction for residents, and stronger control for estate management.
         </div>
         <div class="how-grid">
             <div class="how-card">
@@ -1618,58 +1844,52 @@
             <div class="how-card">
                 <div class="how-number">2</div>
                 <h3>Verify at the Gate</h3>
-                <p>Guards check vehicle details, resident status, walk-ins, and approved visitors from the guard room without relying on paper books or unclear phone confirmations.</p>
+                <p>Gate operations teams check vehicle details, resident status, walk-ins, and approved visitors from the operations portal without relying on paper books or unclear phone confirmations.</p>
             </div>
             <div class="how-card">
                 <div class="how-number">3</div>
                 <h3>Approve with Confidence</h3>
-                <p>Because visitor records are already captured and searchable, guards can validate faster, reduce exposure at the entrance, and keep a secure digital audit trail.</p>
+                <p>Because visitor records are already captured and searchable, site teams can validate faster, reduce exposure at the entrance, and keep a secure digital audit trail.</p>
             </div>
         </div>
     </section>
 
     <section class="section section-tone-warm section-panel reveal">
-        <h2 class="section-title">Why Estates Choose EquaSec</h2>
+        <h2 class="section-title">Why EquaSec Works</h2>
         <div class="section-intro">
-            EquaSec improves security without making access slower or more complicated. It gives guards, residents, and estate teams a better way to manage entry while reducing manual checks, delays, and avoidable risk at the gate.
+            By automating visitor pre-registration and providing real-time access visibility, EquaSec eliminates manual processes, reduces confusion at entry points, and scales seamlessly from small estates to large multi-site operations.
         </div>
         <div class="benefits-slider" id="benefits-slider">
             <div class="benefits-viewport">
                 <div class="benefits-track" id="benefits-track">
                     <div class="benefits-slide">
                         <div class="card benefits-card">
-                            <h3>Secure Convenience</h3>
-                            <p>Residents can book visitors in advance, avoid unnecessary trips to the gate, and let guards handle verification through the system for a smoother and more secure arrival process.</p>
+                            <h3>Software-First Value</h3>
+                            <p>Start with zero mandatory hardware cost. Deliver immediate operational benefit through apps, workflows, and communication tools that work with your existing team structure.</p>
                         </div>
                     </div>
                     <div class="benefits-slide">
                         <div class="card benefits-card">
-                            <h3>No Extra Hardware Costs</h3>
-                            <p>EquaSec is designed to deliver operational value without forcing estates into unnecessary hardware spend, helping communities modernize access in a more affordable way.</p>
+                            <h3>Scalable Integration</h3>
+                            <p>Grow from software-only to hardware-backed access points as your needs evolve. Biometric, keypad, and time-and-attendance integrations are available on demand without major infrastructure overhaul.</p>
                         </div>
                     </div>
                     <div class="benefits-slide">
                         <div class="card benefits-card">
-                            <h3>Safer Gate Verification</h3>
-                            <p>Guards can review registered vehicles, pre-authorized visitors, and walk-ins from the guard room, reducing the need to leave their post to manually inspect or confirm arrivals.</p>
+                            <h3>Real-Time Accountability</h3>
+                            <p>Monitor patrol checkpoints, scan events, visitor arrivals, and access approvals in real time. Management gains complete visibility across all entry points and operations activity.</p>
                         </div>
                     </div>
                     <div class="benefits-slide">
                         <div class="card benefits-card">
-                            <h3>Guard Movement Visibility</h3>
-                            <p>EquaSec can help management monitor guard activity and movement, improving accountability, oversight, and response coordination across the estate.</p>
+                            <h3>Reduced Gate Friction</h3>
+                            <p>No surprise visits or endless phone confirmations. Pre-registered visitors, vehicle records, and resident approval data are searchable at the gate, enabling faster, more confident entry decisions.</p>
                         </div>
                     </div>
                     <div class="benefits-slide">
                         <div class="card benefits-card">
-                            <h3>Less Risk at the Entrance</h3>
-                            <p>Instead of waiting for a visitor to arrive and then calling a resident to confirm access, estates can work from approved visitor records already captured in the system, reducing confusion and exposure at the gate.</p>
-                        </div>
-                    </div>
-                    <div class="benefits-slide">
-                        <div class="card benefits-card">
-                            <h3>Clear Visitor Identification</h3>
-                            <p>The system helps guards confirm whether a person is a resident or a visitor, and every visitor can be linked to a unique visitor code for faster and more reliable access validation without depending on a handwritten visitor book.</p>
+                            <h3>Digital Audit Trail</h3>
+                            <p>Every visitor, approval, and access event is recorded securely. No paper registers, no missing records, and full compliance-ready documentation for site reviews and audits.</p>
                         </div>
                     </div>
                 </div>
@@ -1682,77 +1902,75 @@
                     <button class="testimonial-dot" type="button" aria-label="Show benefit 3"></button>
                     <button class="testimonial-dot" type="button" aria-label="Show benefit 4"></button>
                     <button class="testimonial-dot" type="button" aria-label="Show benefit 5"></button>
-                    <button class="testimonial-dot" type="button" aria-label="Show benefit 6"></button>
                 </div>
                 <button id="benefits-next" class="testimonial-arrow" type="button" aria-label="Show next benefit">&#8594;</button>
             </div>
         </div>
     </section>
     
-    <section class="section section-tone-slate section-panel reveal">
-        <h2 class="section-title">Integrations and Access Options</h2>
-        <div class="section-intro">
-            EquaSec works as a modern software-first platform and can also support added access-control layers where the estate requires them. Optional hardware-based integrations are quoted according to the site setup.
-        </div>
-        <div class="integrations-grid">
-            <div class="integration-card">
-                <strong>Visitor Codes</strong>
-                <p>Issue unique digital visitor codes that help guards validate entry faster and with better auditability.</p>
+    <section id="technology" class="section section-tone-slate section-panel reveal">
+        <video class="tech-foundation-bg-video" src="istockphoto-2206394886-640_adpp_is.mp4" autoplay loop muted playsinline></video>
+        <div class="tech-foundation-shell">
+            <h2 class="section-title">Technical Foundation</h2>
+            <div class="section-intro">
+                EquaSec is built on a modern software-first architecture, ready to integrate with hardware as your operational needs evolve.
             </div>
-            <div class="integration-card">
-                <strong>Guard Portal</strong>
-                <p>Give on-site security teams a dedicated interface for resident checks, visitor lookups, and vehicle verification.</p>
-            </div>
-            <div class="integration-card">
-                <strong>Keypad Access</strong>
-                <p>Support keypad-based workflows where estates want a physical input point alongside digital access management.</p>
-            </div>
-            <div class="integration-card">
-                <strong>Biometric Scanners</strong>
-                <p>Biometric integrations can be included for sites that require enhanced identity validation and controlled access points.</p>
+            <div class="tech-foundation-grid">
+                <div>
+                    <div class="integrations-grid" style="grid-template-columns: 1fr; gap: 18px;">
+                        <div class="integration-card">
+                            <strong>Core Platform</strong>
+                            <p>Resident apps, visitor management workflows, operations portal, real-time communication, and complete access audit trail.</p>
+                        </div>
+                        <div class="integration-card">
+                            <strong>Authentication Layer</strong>
+                            <p>Unique digital visitor codes, vehicle registration lookup, and resident verification integrated into gate workflows.</p>
+                        </div>
+                        <div class="integration-card">
+                            <strong>Optional Hardware</strong>
+                            <p>Keypad, biometric, and time-and-attendance hardware integrated directly into the platform for automated access validation.</p>
+                        </div>
+                        <div class="integration-card">
+                            <strong>System Integration</strong>
+                            <p>Connect to existing CCTV, alarm systems, gate automation, and third-party management platforms via secure APIs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: linear-gradient(180deg, #ffffff, #fdfbf6); border-radius: 16px; padding: 60px 40px; text-align: center; border: 1px solid rgba(184, 146, 77, 0.2); box-shadow: 0 12px 30px rgba(14,20,30,0.07);">
+                    <div style="font-size: 3.5rem; color: var(--gold-accent); margin-bottom: 14px;">⚙</div>
+                    <h3 style="color: var(--ink-blue); margin-bottom: 12px; font-size: 1.35rem; letter-spacing: 0.06em; font-family: 'Fraunces', Georgia, serif;">Architecture Ready</h3>
+                    <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.7;">Your system grows with your estate. Start lean with software, scale up with hardware integrations, all unified under one platform dashboard.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="section section-tone-cream section-panel reveal">
-        <h2 class="section-title">Portal Access</h2>
+    <section class="section section-tone-blue section-panel reveal">
+        <h2 class="section-title">Other Services We Offer</h2>
         <div class="section-intro">
-            Existing users can access the live EquaSec portal below, while new estates can use the same section to preview the experience before booking a demo.
+            Beyond the core platform, we provide focused infrastructure and integration services to complete your access environment.
         </div>
-        <div class="portal-embed-wrap">
-            <div class="portal-credentials" aria-label="Resident test account credentials">
-                <div class="portal-credentials-copy">
-                    <strong>Resident Test Account</strong>
-                    <p>Use these details when testing resident access on the portal.</p>
-                </div>
-                <div class="portal-credentials-list">
-                    <div class="portal-credential-item">
-                        <span>Username</span>
-                        <strong>tijalot817@bpotogo.com</strong>
-                    </div>
-                    <div class="portal-credential-item">
-                        <span>Password</span>
-                        <strong>961831</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="portal-embed-head">
-                <div>
-                    <strong>EquaSec Portal</strong>
-                    <span>Use the live portal below, or book a guided demo if you want a walkthrough.</span>
-                </div>
-                <div class="portal-embed-actions">
-                    <a class="portal-embed-link" href="https://equasec.co.za/login" target="_blank" rel="noopener">Open in tab</a>
-                    <a class="portal-embed-link" href="#contact">Book a demo</a>
-                </div>
-            </div>
-            <iframe
-                class="portal-embed-frame"
-                src="https://equasec.co.za/login"
-                title="EquaSec portal login"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-            ></iframe>
+        <div class="service-highlight">
+            <h3>Access Control Systems</h3>
+            <p>We design and deploy secure entry systems for estates and facilities.</p>
+            <ul class="service-points">
+                <li>Biometric, keypad, and card-based entry</li>
+                <li>Gate and door automation</li>
+                <li>Remote monitoring and access management</li>
+                <li>Integration with CCTV and estate systems</li>
+            </ul>
+            <p>Delivered with setup, onboarding, and support.</p>
+        </div>
+        <div class="service-highlight" style="margin-top: 24px;">
+            <h3>Gated Estate Infrastructure Solutions</h3>
+            <p>Practical infrastructure to modernize gate operations without overcomplicating your stack.</p>
+            <ul class="service-points">
+                <li>Resident, visitor, and gate workflow tooling</li>
+                <li>Biometric and keypad integration</li>
+                <li>Time and attendance options</li>
+                <li>Deployment, integration, and ongoing support</li>
+            </ul>
+            <p>Tailored for both small and large estates.</p>
         </div>
     </section>
 
@@ -1770,7 +1988,7 @@
                     <li>✔ No mandatory hardware cost burden</li>
                     <li>✔ Optional keypad and biometric integrations available</li>
                     <li>✔ Multiple Users Per Property</li>
-                    <li>✔ Resident, Management, and Guard Features</li>
+                    <li>✔ Resident, Management, and Access Team Features</li>
                     <li>✔ Secure Cloud-Based Environment</li>
                     <li>✔ Ongoing Updates and Maintenance</li>
                     <li>✔ Priority Support</li>
@@ -1811,11 +2029,11 @@
             </div>
             <div class="faq-item">
                 <button class="faq-question" type="button" aria-expanded="false">
-                    <span>Can guards verify walk-ins and residents through the system?</span>
+                    <span>Can our access team verify walk-ins and residents through the system?</span>
                     <span class="faq-icon" aria-hidden="true">+</span>
                 </button>
                 <div class="faq-answer">
-                    <div class="faq-answer-inner">Yes. Guards can use the platform to check whether a person is a resident, a booked visitor, or a walk-in, helping reduce uncertainty and improve decision-making at the gate.</div>
+                    <div class="faq-answer-inner">Yes. Your access team can use the platform to check whether a person is a resident, a booked visitor, or a walk-in, helping reduce uncertainty and improve decision-making at the gate.</div>
                 </div>
             </div>
             <div class="faq-item">
@@ -1829,11 +2047,11 @@
             </div>
             <div class="faq-item">
                 <button class="faq-question" type="button" aria-expanded="false">
-                    <span>Can EquaSec work for both residents and security teams?</span>
+                    <span>Can EquaSec work for both residents and estate operations teams?</span>
                     <span class="faq-icon" aria-hidden="true">+</span>
                 </button>
                 <div class="faq-answer">
-                    <div class="faq-answer-inner">Yes. The platform is built to support residents, estate management, and guards from one shared system, with each role getting the right workflow and visibility.</div>
+                    <div class="faq-answer-inner">Yes. The platform is built to support residents, estate management, and access operations teams from one shared system, with each role getting the right workflow and visibility.</div>
                 </div>
             </div>
         </div>
@@ -1852,7 +2070,7 @@
                     </div>
                     <div class="contact-meta-item">
                         <strong>What You Can Ask</strong>
-                        <span>Pricing, demos, rollout options, visitor management, and guard portal workflows.</span>
+                        <span>Pricing, demos, rollout options, visitor management, and operations portal workflows.</span>
                     </div>
                     <div class="contact-meta-item">
                         <strong>Response</strong>
@@ -1862,7 +2080,7 @@
             </div>
             <div class="contact-panel">
                 <div style="text-align: center; color: var(--text-gray); margin-bottom: 22px; font-size: 1.02rem; line-height: 1.7;">
-                    Request a demo, ask for a quote, or speak to us about how EquaSec can support your residents, management team, and security operation.
+                    Request a demo, ask for a quote, or speak to us about how EquaSec can support your residents, management team, and access operations.
                 </div>
                 <form id="contact-form" class="contact-form" action="https://formsubmit.co/kkpartners@equameridianholdings.com" method="POST">
                     <input type="hidden" name="_subject" value="New EquaSec Website Enquiry">
@@ -1882,7 +2100,7 @@
                             <option value="" selected disabled>Select a service</option>
                             <option value="Resident access management">Resident access management</option>
                             <option value="Visitor management">Visitor management</option>
-                            <option value="Guard portal">Guard portal</option>
+                            <option value="Operations portal">Operations portal</option>
                             <option value="Estate security solution">Estate security solution</option>
                             <option value="Request a demo">Request a demo</option>
                         </select>
@@ -1915,7 +2133,7 @@
             <div>
                 <div class="footer-title">EquaSec</div>
                 <div class="footer-brand">Connected Access. Safer Communities.</div>
-                <div class="footer-copy">EquaSec helps estates modernize visitor management, resident access, and guard workflows through one secure platform designed for convenience, visibility, and operational control.</div>
+                <div class="footer-copy">EquaSec helps estates modernize visitor management, resident access, and access workflows through one secure platform designed for convenience, visibility, and operational control.</div>
             </div>
             <div>
                 <div class="footer-title">Quick Links</div>
@@ -1929,11 +2147,9 @@
             </div>
             <div>
                 <div class="footer-title">Get In Touch</div>
-                <div class="footer-links">
+                <div class="footer-links footer-links-contact">
                     <a class="footer-link" href="#contact">Book a demo</a>
                     <a class="footer-link" href="https://wa.me/27662737455" target="_blank" rel="noopener">WhatsApp</a>
-                    <span class="footer-meta">Johannesburg, South Africa</span>
-                    <span class="footer-meta">A product of Equatec</span>
                 </div>
             </div>
         </div>
